@@ -1,0 +1,7 @@
+# Personal
+*.txt
+
+# PyCharm
+
+*.iml
+.idea/
