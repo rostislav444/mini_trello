@@ -1,0 +1,7 @@
+schema: 'http://127.0.0.1:5000/graphql'
+documents: 'src/**/*.graphql'
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
