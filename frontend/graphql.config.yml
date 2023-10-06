@@ -1,7 +1,7 @@
 schema:
   - 'http://127.0.0.1:5000/graphql':
       headers:
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NjQxNzA5OCwianRpIjoiYjczMTY4YzYtNmRlYy00NjJjLWE1ZTUtYmE3NDI1MjI5OWFhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6Ijc0YjEyMTY0LWM4ZjktNDRjZS04ZjY1LWNlOTIwNmFmODhhYyIsIm5iZiI6MTY5NjQxNzA5OCwiZXhwIjoxNjk3MDIxODk4fQ.hbVES3bAs6Jv1R6ieTX9c_rjWsUix_eCuq0Hi2ssW4o'
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NjU4OTAwNiwianRpIjoiNTU5ZGIzOTUtZWYyOC00MzUwLWFiM2EtODc1YjVhNTZkMDhhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjA2MzMyMmNlLTAwOTAtNDJkZi1iOThlLWUwZDAwNWQyM2FhMiIsIm5iZiI6MTY5NjU4OTAwNiwiZXhwIjoxNjk3MTkzODA2fQ.6LmM_lwGfndHX-AP6kY4StcXaTMRnJWwrEIPw1-33h8'
 documents: 'src/**/*.graphql'
 generates:
   src/generated/graphql.ts:

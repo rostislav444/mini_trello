@@ -5,6 +5,7 @@ import React from "react";
 interface SelectUser {
     id: string;
     firstName: string;
+    lastName: string;
     selected: boolean;
 }
 
@@ -49,7 +50,7 @@ export const Assignee = ({assigneeList, setAssigneeList}: AssigneeProps) => {
                     assigneeList.map(u =>
                         <GridItem key={u.id}>
                             <Checkbox onChange={() => handleCheckboxChange(u.id, u.selected)} isChecked={u.selected}>
-                                {u.firstName}
+                                {u.firstName} {u.lastName}
                             </Checkbox>
                         </GridItem>
                     )

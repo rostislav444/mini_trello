@@ -17,6 +17,7 @@ export const DASHBOARD_BY_ID = gql`
                     id
                     title
                     order
+                    priority
                 }
             }
             id

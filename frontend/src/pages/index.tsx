@@ -1,10 +1,10 @@
 import {Layout} from 'components/Shared/Layout';
 import {useEffect} from "react";
-import {Login} from "../../pages/login";
+import {Login} from "./login";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import {CreateDashboard} from "../../pages/dashboard/create";
-import {Dashboard} from "../../pages/dashboard";
-import {useUser} from "../../context/userContext";
+import {CreateDashboard} from "./dashboard/create";
+import {Dashboard} from "./dashboard";
+import {useUser} from "context/userContext";
 import {globalEvents} from 'utils/events';
 
 
@@ -29,17 +29,17 @@ const router = createBrowserRouter([
 export const Main = () => {
     const {token, logout} = useUser();
 
-    useEffect(() => {
-        const handleLogout = () => {
-            logout();
-        };
-
-        globalEvents.on('logout', handleLogout);
-
-        return () => {
-            globalEvents.off('logout', handleLogout);
-        };
-    }, [logout]);
+    // useEffect(() => {
+    //     const handleLogout = () => {
+    //         logout();
+    //     };
+    //
+    //     globalEvents.on('logout', handleLogout);
+    //
+    //     return () => {
+    //         globalEvents.off('logout', handleLogout);
+    //     };
+    // }, [logout]);
 
     if (!token) return <Login/>;
 

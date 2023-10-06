@@ -56,3 +56,21 @@ export const UPDATE_CARD = gql`
         }
     }
 `
+
+export const REORDER_CARD = gql`
+    mutation ReorderCard(
+        $cardId: String!,
+        $columnId: String!,
+        $order: Int!
+    ) {
+        reorderCard(
+            cardId: $cardId,
+            columnId: $columnId,
+            order: $order
+        ) {
+            card {
+                id
+            }
+        }
+    }
+`

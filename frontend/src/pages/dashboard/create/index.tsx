@@ -100,25 +100,6 @@ export const CreateDashboard = () => {
         setNewColumn('');
     }
 
-    const handleCheckboxChange = (id: string, selected: boolean) => {
-        const selectedUsers = usersList.map(user => {
-            if (user.id === id) {
-                return {...user, selected: !selected}
-            }
-            return user;
-        })
-        setUsersList(selectedUsers)
-        setValue('assignee', selectedUsers.filter(user => user.selected)
-                                          .map(user => user.id));
-    }
-
-    const handleSelectAllUsers = (value = true) => {
-        const selectedUsers = usersList.map(user => ({...user, selected: value}))
-        setUsersList(selectedUsers)
-        setValue('assignee', selectedUsers.filter(user => user.selected)
-                                          .map(user => user.id));
-    }
-
     // box color transparent gray
     const bgColor = colorMode === "dark" ? "gray.700" : "gray.100";
 

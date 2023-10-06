@@ -53,6 +53,10 @@ export const CardForm = ({card, columnId, usersList, onFulfilled, create = true,
             priority: data.priority
         };
 
+        if (!onFulfilled) {
+            throw new Error('onFulfilled is required');
+        }
+
         let response;
 
         if (create) {
@@ -66,6 +70,11 @@ export const CardForm = ({card, columnId, usersList, onFulfilled, create = true,
                     ...commonPayload
                 }
             });
+
+            if (response?.data?.createCard?.card?.id) {
+                onFulfilled(response.data.createCard.card.id);
+            }
+
         } else {
             if (!card?.id) {
                 throw new Error('CardId is required');
@@ -77,14 +86,9 @@ export const CardForm = ({card, columnId, usersList, onFulfilled, create = true,
                     ...commonPayload
                 }
             });
-        }
-
-        if (!onFulfilled) {
-            throw new Error('onFulfilled is required');
-        }
-
-        if (response.data) {
-            onFulfilled(response.data.createCard.card.id);
+            if (response?.data?.updateCard?.card?.id) {
+                onFulfilled(response.data.updateCard.card.id);
+            }
         }
     }
 

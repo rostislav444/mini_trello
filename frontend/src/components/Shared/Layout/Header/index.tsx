@@ -9,7 +9,7 @@ import {useUser} from "../../../../context/userContext";
 
 
 export const Header: React.FC = () => {
-    const {user} = useUser();
+    const {user, logout} = useUser();
     const {dashboardId} = useParams();
     const navigate = useNavigate();
     const {dashboardListQuery} = useGraphQL();
@@ -65,6 +65,7 @@ export const Header: React.FC = () => {
                 <Flex flex='1' align='center'>
                     <Avatar w='36px' h='36px' bg='teal.500'/>
                     <Text whiteSpace='nowrap' ml='4'>{user?.email}</Text>
+                    <Button ml='4' colorScheme="gray" onClick={logout}>Logout</Button>
                     <ColorModeSwitcher/>
                 </Flex>
             </Flex>

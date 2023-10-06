@@ -1,4 +1,4 @@
-import {Button, Heading, HStack, ModalBody, ModalFooter, Tag, Text} from "@chakra-ui/react";
+import {Button, Heading, Box, ModalBody, ModalFooter, Tag, Text} from "@chakra-ui/react";
 import React from "react";
 import {CardState} from "interfaces/card";
 
@@ -8,13 +8,13 @@ export const CardBodyData = ({card, onClose}: { card: CardState, onClose: any })
         <ModalBody>
             <Heading size="sm">{card.title}</Heading>
             <Text mt={4}>{card.description}</Text>
-            <HStack mt={4} spacing={4}>
+            <Box mt={4}>
                 {card?.assignees?.map((assignee) => (
-                    <Tag size={'md'} key={assignee.id} variant='solid' colorScheme='teal'>
+                    <Tag mr={2} mb={2} size={'md'} key={assignee.id} variant='solid' colorScheme='blue'>
                         {assignee.firstName}
                     </Tag>
                 ))}
-            </HStack>
+            </Box>
 
         </ModalBody>
         <ModalFooter>

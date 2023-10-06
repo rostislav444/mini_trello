@@ -7,6 +7,7 @@ main_routes = Blueprint('main_routes', __name__)
 
 @main_routes.route('/login', methods=['POST'])
 def login():
+    print(request.json)
     email = request.json.get('email')
     password = request.json.get('password')
 

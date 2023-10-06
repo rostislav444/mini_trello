@@ -24,6 +24,7 @@ export const Login = () => {
                 body: JSON.stringify(data)
             });
             const responseData = await response.json();
+            console.log(responseData)
             if (responseData.token) {
                 login(responseData.user, responseData.token);
             }
@@ -33,9 +34,9 @@ export const Login = () => {
     };
 
     return (
-        <Box  w='100%' h='100vh' display='flex' justifyContent='center' alignItems='center'>
-            <ColorModeSwitcher position='fixed' right={4} top={4} />
-             <Box bg='whiteAlpha.50' w='400px' borderRadius='md' boxShadow='md' p='4'>
+        <Box w='100%' h='100vh' display='flex' justifyContent='center' alignItems='center'>
+            <ColorModeSwitcher position='fixed' right={4} top={4}/>
+            <Box bg='whiteAlpha.50' w='400px' borderRadius='md' boxShadow='md' p='4'>
                 <Heading size='lg' mb='4'>Login</Heading>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <FormControl id="email" isInvalid={!!errors.email} mb='2'>

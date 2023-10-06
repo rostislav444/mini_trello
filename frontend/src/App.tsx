@@ -1,6 +1,6 @@
 import * as React from "react";
 import {ChakraProvider, theme} from "@chakra-ui/react";
-import {Main} from "components/App";
+import {Main} from "./pages";
 import {ApolloProvider} from '@apollo/client';
 import {client} from 'utils/ApolloClient';
 import {GraphQLProvider} from "./context/graphqlConext";
