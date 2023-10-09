@@ -6,14 +6,14 @@ import {useGraphQL} from "context/graphqlConext";
 import {client} from "utils/ApolloClient";
 import {DASHBOARD_BY_ID} from "graphql/queries/getDashboardById";
 
-interface DashboardColumnsProps {
+interface ColumnsProps {
     dashboard: DashboardState,
     refetch: any,
     networkStatus: any
 }
 
 
-export const DashboardColumns = ({dashboard, refetch}: DashboardColumnsProps) => {
+export const Columns = ({dashboard, refetch}: ColumnsProps) => {
     const {columns, assignees} = dashboard;
     const {reorderCardMutation} = useGraphQL();
     const totalColumns = columns?.length || 0;
@@ -32,6 +32,7 @@ export const DashboardColumns = ({dashboard, refetch}: DashboardColumnsProps) =>
         if (!sourceColumn || !sourceColumn.cards || !destColumn || !destColumn.cards) {
             return;
         }
+
 
         // Remove card from source column
         const [movedCard] = sourceColumn.cards.splice(source.index, 1);

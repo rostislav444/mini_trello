@@ -6,7 +6,7 @@ import {Droppable} from "react-beautiful-dnd";
 import {ColumnState} from "interfaces/column";
 import {EditColumn} from "components/App/Dashboard/Columns/Column/Edit";
 
-interface DashboardColumnsProps {
+interface ColumnsProps {
     column: ColumnState,
     assignees: {
         id: string,
@@ -18,7 +18,7 @@ interface DashboardColumnsProps {
 }
 
 
-export const Column = ({column, assignees, refetch, totalColumns}: DashboardColumnsProps) => {
+export const Column = ({column, assignees, refetch, totalColumns}: ColumnsProps) => {
     const bg = useColorModeValue('white', 'gray.700')
 
 

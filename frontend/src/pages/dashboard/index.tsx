@@ -1,15 +1,17 @@
 import {DASHBOARD_BY_ID} from "graphql/queries/getDashboardById";
 import {useParams} from "react-router-dom";
-import {Box, Flex, Heading} from "@chakra-ui/react";
+import {Box, Flex, Heading, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger} from "@chakra-ui/react";
 import {useQuery} from "@apollo/client";
-import {DashboardColumns} from "components/App/Dashboard/Columns";
+import {Columns} from "components/App/Dashboard/Columns";
 import {CreateColumn} from "components/App/Dashboard/Columns/Column/Create";
+import {InfoOutlineIcon} from "@chakra-ui/icons";
 
 
 export const Dashboard = () => {
     const {dashboardId} = useParams();
     const {loading, error, data, refetch, networkStatus} = useQuery(DASHBOARD_BY_ID, {variables: {dashboardId},})
 
+    console.log('Dashboard', data)
 
     if (loading) {
         return <Heading>Loading</Heading>
@@ -23,10 +25,24 @@ export const Dashboard = () => {
 
     return <Box mt={12}>
         <Flex justifyContent="space-between" alignItems="center">
-            <Heading>{dashboard?.title}</Heading>
+            <Flex justifyContent="space-start" alignItems="center">
+                <Heading>{dashboard?.title}</Heading>
+                {dashboard?.description ? <Popover>
+                    <PopoverTrigger>
+                        <InfoOutlineIcon cursor={'pointer'} opacity={0.3} w={6} h={6} ml={4}/>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                        <PopoverArrow/>
+                        <PopoverCloseButton/>
+                        <PopoverHeader>Description</PopoverHeader>
+                        <PopoverBody maxH={240} overflowY={'auto'}>{dashboard?.description}</PopoverBody>
+                    </PopoverContent>
+                </Popover> : null}
+
+            </Flex>
             <CreateColumn refetch={refetch} totalColumns={dashboard?.columns?.length || 0}/>
         </Flex>
-        <DashboardColumns key={dashboard.id} dashboard={dashboard} refetch={refetch} networkStatus={networkStatus}/>
+        <Columns key={dashboard.id} dashboard={dashboard} refetch={refetch} networkStatus={networkStatus}/>
     </Box>
 
 }

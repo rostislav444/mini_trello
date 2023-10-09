@@ -28,10 +28,8 @@ export const CreateDashboard = () => {
     } = useGraphQL();
     const {
         register,
-        watch,
         handleSubmit,
         formState: {errors},
-        setValue
     } = useForm<FormData>();
     const {colorMode} = useColorMode();
     const navigate = useNavigate();

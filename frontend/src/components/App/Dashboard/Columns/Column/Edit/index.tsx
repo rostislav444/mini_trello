@@ -5,14 +5,14 @@ import {Modal, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDis
 import {ColumnForm} from "components/App/Dashboard/Columns/Column/Form";
 
 
-interface DashboardColumnsProps {
+interface ColumnsProps {
     column: ColumnState,
     refreshDashboard: any,
     totalColumns: number,
 }
 
 
-export const EditColumn = ({column, refreshDashboard, totalColumns}: DashboardColumnsProps) => {
+export const EditColumn = ({column, refreshDashboard, totalColumns}: ColumnsProps) => {
     const {isOpen, onOpen, onClose} = useDisclosure()
 
     const onFulfilled = () => {
