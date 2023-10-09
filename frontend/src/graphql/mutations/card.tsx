@@ -74,3 +74,17 @@ export const REORDER_CARD = gql`
         }
     }
 `
+
+export const DELETE_CARD = gql`
+    mutation DeleteCard(
+        $id: String!
+    ) {
+        deleteCard(
+            id: $id
+        ) {
+            card {
+                id
+            }
+        }
+    }
+`

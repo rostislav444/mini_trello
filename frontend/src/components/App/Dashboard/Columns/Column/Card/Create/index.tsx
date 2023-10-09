@@ -1,6 +1,6 @@
-import {Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure,} from '@chakra-ui/react'
+import {Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useColorModeValue, useDisclosure,} from '@chakra-ui/react'
 import React from "react";
-import {CardForm} from "components/App/Dashboard/Columns/Card/Body/Form";
+import {CardForm} from "components/App/Dashboard/Columns/Column/Card/Body/Form";
 import {useNavigate} from "react-router-dom";
 
 
@@ -37,7 +37,7 @@ export const CreateCard = ({columnId, columnTitle, dashboardAssignees, onCreate}
 
     return (
         <>
-            <Button onClick={onOpen}>+</Button>
+            <Button variant={'ghost'} onClick={onOpen}>+</Button>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay/>

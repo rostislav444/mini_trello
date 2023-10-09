@@ -22,11 +22,7 @@ const authLink = setContext(() => {
 
 const errorLink = onError(({graphQLErrors, networkError}) => {
     if (networkError && 'statusCode' in networkError && networkError.statusCode === 401) {
-        console.log('Unauthorized, status code - 401')
-        // Remove token and user from localStorage
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-
+        console.log('Unauthorized, status code - 401', networkError)
         globalEvents.emit('logout');
     }
 });

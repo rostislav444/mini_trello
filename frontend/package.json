@@ -6,6 +6,7 @@
     "@apollo/client": "^3.8.4",
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.1",
+    "@chakra-ui/react-types": "^2.0.6",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
     "@reduxjs/toolkit": "^1.9.6",

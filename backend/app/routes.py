@@ -24,6 +24,8 @@ def login():
     if not user.verify_password(password):
         return {'error': 'Invalid password'}, 400
 
+    print(user.to_dict())
+
     return {
         'token': user.generate_token(),
         'user': user.to_dict()

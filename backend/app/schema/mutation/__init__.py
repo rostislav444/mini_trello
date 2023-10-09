@@ -1,12 +1,20 @@
 import graphene
 
+from .card_comments_mutation import CardCommentsMutation
+from .cards_mutation import CardMutation
 from .columns_mutation import ColumnMutation
 from .dashboard_mutation import DashboardMutation
 from .user_muatation import UserMutation
-from .cards_mutation import CardMutation
 
 
-class Mutation(graphene.ObjectType, UserMutation, DashboardMutation, ColumnMutation, CardMutation):
+class Mutation(
+    graphene.ObjectType,
+    CardCommentsMutation,
+    CardMutation,
+    ColumnMutation,
+    DashboardMutation,
+    UserMutation,
+):
     pass
 
 

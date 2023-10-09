@@ -29,17 +29,17 @@ const router = createBrowserRouter([
 export const Main = () => {
     const {token, logout} = useUser();
 
-    // useEffect(() => {
-    //     const handleLogout = () => {
-    //         logout();
-    //     };
-    //
-    //     globalEvents.on('logout', handleLogout);
-    //
-    //     return () => {
-    //         globalEvents.off('logout', handleLogout);
-    //     };
-    // }, [logout]);
+    useEffect(() => {
+        const handleLogout = () => {
+            logout();
+        };
+
+        globalEvents.on('logout', handleLogout);
+
+        return () => {
+            globalEvents.off('logout', handleLogout);
+        };
+    }, [logout]);
 
     if (!token) return <Login/>;
 

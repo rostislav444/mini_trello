@@ -1,7 +1,7 @@
 schema:
   - 'http://127.0.0.1:5000/graphql':
       headers:
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NjU4OTAwNiwianRpIjoiNTU5ZGIzOTUtZWYyOC00MzUwLWFiM2EtODc1YjVhNTZkMDhhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjA2MzMyMmNlLTAwOTAtNDJkZi1iOThlLWUwZDAwNWQyM2FhMiIsIm5iZiI6MTY5NjU4OTAwNiwiZXhwIjoxNjk3MTkzODA2fQ.6LmM_lwGfndHX-AP6kY4StcXaTMRnJWwrEIPw1-33h8'
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5Njg3MDczOCwianRpIjoiMTVjYTgwZjYtNzBhZC00YmI1LThjYmMtNzg4ZTM3MjM5MTRiIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImYyYmVjNjQ3LWIyODAtNGYxZC1iMTNhLTFjMDVkYWQxYzZjZSIsIm5iZiI6MTY5Njg3MDczOCwiZXhwIjoxNjk3NDc1NTM4fQ.YbnQ1ChLGA92FLhyvymAPzba6zBck-WWOaBPcDJjlfs'
 documents: 'src/**/*.graphql'
 generates:
   src/generated/graphql.ts:

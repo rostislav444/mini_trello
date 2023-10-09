@@ -2,7 +2,7 @@ import uuid
 
 import graphene
 
-from app.models import CardsModel, CardAssigneeModel, PriorityEnum
+from app.models import CardsModel, CardAssigneeModel, PriorityEnum, CardCommentsModel
 from app.schema.types import Cards
 from utils.valid_uuid import decode_id
 
@@ -18,8 +18,6 @@ class CreateCard(graphene.Mutation):
     card = graphene.Field(Cards)
 
     def mutate(self, info, column_id, title, priority, description=None, assignees=[]):
-        column_id = decode_id(column_id)
-
         # Use the GSI to count the cards with the specific column_id
         existing_cards_count = CardsModel.card_order_index.count(hash_key=column_id)
 
@@ -151,10 +149,47 @@ class ReorderCard(graphene.Mutation):
         return ReorderCard(card=moving_card)
 
 
+class DeleteCard(graphene.Mutation):
+    class Arguments:
+        id = graphene.String(required=True)
+
+    card = graphene.Field(Cards)
+
+    def mutate(self, info, id):
+        card_to_delete = CardsModel.get(id)
+
+        # Delete the card assignees
+        existing_assignees = CardAssigneeModel.scan(CardAssigneeModel.card_id == card_to_delete.id)
+
+        for assignee in existing_assignees:
+            assignee.delete()
+
+        # Delete all card comments
+        existing_comments = CardCommentsModel.scan(CardCommentsModel.card_id == card_to_delete.id)
+
+        for comment in existing_comments:
+            comment.delete()
+
+        # Get all cards in the current column
+        cards_in_column = list(CardsModel.card_order_index.query(card_to_delete.column_id))
+
+        # Adjust the order of the cards that come after the card being deleted
+        for card in cards_in_column:
+            if card.order > card_to_delete.order:
+                card.order -= 1
+                card.save()
+
+        # Delete the specified card
+        card_to_delete.delete()
+
+        return DeleteCard(card=card_to_delete)
+
+
 class CardMutation:
     create_card = CreateCard.Field()
     update_card = UpdateCard.Field()
     reorder_card = ReorderCard.Field()
+    delete_card = DeleteCard.Field()
 
 
 __all__ = [

@@ -1,6 +1,6 @@
 import {Button, Modal, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure} from "@chakra-ui/react";
 import React from "react";
-import {ColumnForm} from "components/App/Dashboard/Columns/Form";
+import {ColumnForm} from "components/App/Dashboard/Columns/Column/Form";
 
 interface CreateColumnProps {
     refetch: any;
@@ -24,7 +24,7 @@ export const CreateColumn = ({refetch, totalColumns}: CreateColumnProps) => {
             <ModalContent>
                 <ModalHeader>Create column</ModalHeader>
                 <ModalCloseButton/>
-                <ColumnForm onFulfilled={onFulfilled} create={true} totalColumns={totalColumns} />
+                <ColumnForm onFulfilled={onFulfilled} create={true} totalColumns={totalColumns} onClose={onClose} />
             </ModalContent>
         </Modal>
     </>

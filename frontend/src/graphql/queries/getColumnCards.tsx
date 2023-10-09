@@ -29,6 +29,17 @@ export const COLUMN_CARD = gql`
                 id
                 firstName
                 lastName
+            },
+            comments {
+                id
+                cardId
+                comment
+                createdAt
+                user {
+                    id
+                    firstName
+                    lastName
+                }
             }
         }
     }

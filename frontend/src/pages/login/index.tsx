@@ -1,8 +1,9 @@
 import React from 'react';
-import {Box, Button, FormControl, FormErrorMessage, FormLabel, Heading, Input} from '@chakra-ui/react';
+import {Box, Button, FormControl, FormErrorMessage, FormLabel, Heading, Input, useColorModeValue} from '@chakra-ui/react';
 import {useForm} from 'react-hook-form';
 import {ColorModeSwitcher} from "components/UI/ColorModeSwitcher";
 import {useUser} from "../../context/userContext";
+
 
 type FormData = {
     email: string;
@@ -10,6 +11,7 @@ type FormData = {
 };
 
 export const Login = () => {
+    const bg = useColorModeValue('white', 'gray.700');
     const {login} = useUser();
     const {register, handleSubmit, formState: {errors}} = useForm<FormData>();
 
@@ -36,7 +38,7 @@ export const Login = () => {
     return (
         <Box w='100%' h='100vh' display='flex' justifyContent='center' alignItems='center'>
             <ColorModeSwitcher position='fixed' right={4} top={4}/>
-            <Box bg='whiteAlpha.50' w='400px' borderRadius='md' boxShadow='md' p='4'>
+            <Box bg={bg} w='400px' borderRadius='md' boxShadow='md' p='4'>
                 <Heading size='lg' mb='4'>Login</Heading>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <FormControl id="email" isInvalid={!!errors.email} mb='2'>

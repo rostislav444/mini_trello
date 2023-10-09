@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import {Box, Button, Flex, Heading} from "@chakra-ui/react";
 import {useQuery} from "@apollo/client";
 import {DashboardColumns} from "components/App/Dashboard/Columns";
-import {CreateColumn} from "components/App/Dashboard/Columns/Create";
+import {CreateColumn} from "components/App/Dashboard/Columns/Column/Create";
 
 
 export const Dashboard = () => {

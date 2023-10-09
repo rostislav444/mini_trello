@@ -1,3 +1,5 @@
+import {CardCommentState} from "interfaces/cardCommets";
+
 export interface CardState {
     id: string;
     columnId: string;
@@ -10,6 +12,7 @@ export interface CardState {
         id: string;
         firstName: string;
     }[];
+    comments?: CardCommentState[];
 }
 
 export interface CardCreateInput {
@@ -52,6 +55,18 @@ export type CardUpdateMutationResponse = {
 
 export type CardReorderMutationResponse = {
     reorderCard: {
+        card: {
+            id: string;
+        }
+    }
+}
+
+export interface CardDeleteInput {
+    id: string;
+}
+
+export type CardDeleteMutationResponse = {
+    deleteCard: {
         card: {
             id: string;
         }

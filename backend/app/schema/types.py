@@ -26,9 +26,14 @@ class CardAssignee(PynamoObjectType):
 
 
 class CardComments(PynamoObjectType):
+    user = graphene.Field(Users)
+
     class Meta:
         model = CardCommentsModel
         interfaces = (graphene.Node,)
+
+    def resolve_user(self, info):
+        return UsersModel.get(self.user_id)
 
 
 class CardAttachments(PynamoObjectType):
@@ -39,6 +44,7 @@ class CardAttachments(PynamoObjectType):
 
 class Cards(PynamoObjectType):
     assignees = graphene.List(Users)
+    comments = graphene.List(CardComments)
 
     class Meta:
         model = CardsModel
@@ -49,6 +55,12 @@ class Cards(PynamoObjectType):
         user_ids = [relation.user_id for relation in assignee_relations]
         users = list(UsersModel.batch_get(user_ids))
         return users
+
+    def resolve_comments(self, info):
+        return CardCommentsModel.card_comments_index.query(
+            self.id,
+            scan_index_forward=True
+        )
 
 
 class Columns(PynamoObjectType):

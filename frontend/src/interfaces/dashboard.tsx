@@ -1,12 +1,4 @@
-import {CardState} from "interfaces/card";
-
-
-export interface ColumnState {
-    id: string;
-    title: string;
-    description?: string;
-    cards?: CardState[];
-}
+import {ColumnState} from "interfaces/column";
 
 
 export interface DashboardState {

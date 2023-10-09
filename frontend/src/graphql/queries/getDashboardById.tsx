@@ -13,6 +13,7 @@ export const DASHBOARD_BY_ID = gql`
             columns {
                 id
                 title
+                order
                 cards {
                     id
                     title

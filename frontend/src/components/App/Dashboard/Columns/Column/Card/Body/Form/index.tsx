@@ -21,11 +21,12 @@ interface CardBodyFormProps {
     onFulfilled: (id: any) => void;
     create: boolean;
     onClose?: any;
+    onDelete?: any;
 }
 
 
-export const CardForm = ({card, columnId, usersList, onFulfilled, create = true, onClose}: CardBodyFormProps) => {
-    const {createCardMutation, updateCardMutation} = useGraphQL()
+export const CardForm = ({card, columnId, usersList, onFulfilled, create = true, onDelete, onClose}: CardBodyFormProps) => {
+    const {createCardMutation, updateCardMutation, deleteCardMutation} = useGraphQL()
     const {register, watch, handleSubmit, formState: {errors}, setValue} = useForm<FormData>({
         defaultValues: {
             title: card?.title || '',
@@ -92,19 +93,34 @@ export const CardForm = ({card, columnId, usersList, onFulfilled, create = true,
         }
     }
 
+    const handleDelete = async () => {
+        if (!card?.id) {
+            throw new Error('CardId is required');
+        }
+        // Call the deleteCardMutation with the cardId
+        const response = await deleteCardMutation({
+            variables: {
+                id: card?.id
+            }
+        });
+        if (response?.data?.deleteCard?.card?.id) {
+            onDelete();
+        }
+    }
+
     return <form onSubmit={handleSubmit(onSubmit)}>
         <ModalBody>
-            <FormControl id="email" isInvalid={!!errors.title} mb='3'>
+            <FormControl isInvalid={!!errors.title} mb='3'>
                 <FormLabel>Title</FormLabel>
                 <Input {...register('title', {required: "Title is required"})} placeholder='Title'/>
                 <FormErrorMessage>{errors.title?.message}</FormErrorMessage>
             </FormControl>
-            <FormControl id="description" isInvalid={!!errors.description} mb='4'>
+            <FormControl isInvalid={!!errors.description} mb='4'>
                 <FormLabel>Description</FormLabel>
                 <Textarea  {...register('description')} placeholder='Description'/>
                 <FormErrorMessage>{errors.description?.message}</FormErrorMessage>
             </FormControl>
-            <FormControl id="description" isInvalid={!!errors.description} mb='4'>
+            <FormControl isInvalid={!!errors.description} mb='4'>
                 <FormLabel>Priorities</FormLabel>
                 <RadioGroup value={formData.priority}>
                     <Stack direction='row'>{
@@ -115,6 +131,7 @@ export const CardForm = ({card, columnId, usersList, onFulfilled, create = true,
             <Assignee assigneeList={assignees} setAssigneeList={setAssignees}/>
         </ModalBody>
         <ModalFooter>
+            {!create && <Button colorScheme='red' mr={3} onClick={handleDelete}>Delete</Button>}
             <Button type='submit' colorScheme='blue' mr={3}>
                 {create ? 'Create' : 'Update'}
             </Button>

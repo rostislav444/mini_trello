@@ -18,8 +18,8 @@ export const Header: React.FC = () => {
     const [dashboardList, setDashboardList] = useState<DashboardState[]>([]);
     const selectedDashboard = dashboardList.find(dashboard => dashboard.id === dashboardId)
 
-    const bgColor = colorMode === "dark" ? "gray.700" : "gray.100";
-    const bgColorSelected = colorMode === "dark" ? "gray.800" : "gray.200";
+    // const bgColor = useColorModeValue('gray.200', 'gray.600')
+    // const bgColorSelected = useColorModeValue('gray.300', 'gray.500')
 
 
     useEffect(() => {
@@ -42,13 +42,13 @@ export const Header: React.FC = () => {
                         <Menu>
                             {({isOpen}) => (
                                 <>
-                                    <MenuButton mr={6} isActive={isOpen} as={Button} rightIcon={<ChevronDownIcon/>}>
+                                    <MenuButton variant="ghost" mr={4} isActive={isOpen} as={Button} rightIcon={<ChevronDownIcon/>}>
                                         {selectedDashboard ? selectedDashboard?.title : 'Select dashboard'}
                                     </MenuButton>
-                                    <MenuList bg={bgColor}>
+                                    <MenuList>
                                         {dashboardList.map(dashboard => (
                                             <MenuItem
-                                                bg={dashboard.id === dashboardId ? bgColorSelected : bgColor}
+                                                // bg={dashboard.id === dashboardId ? bgColorSelected : bgColor}
                                                 key={dashboard.id}
                                                 onClick={() => handleDashboardClick(dashboard.id)}
                                             >
@@ -65,7 +65,7 @@ export const Header: React.FC = () => {
                 <Flex flex='1' align='center'>
                     <Avatar w='36px' h='36px' bg='teal.500'/>
                     <Text whiteSpace='nowrap' ml='4'>{user?.email}</Text>
-                    <Button ml='4' colorScheme="gray" onClick={logout}>Logout</Button>
+                    <Button ml='6' variant="ghost" onClick={logout}>Logout</Button>
                     <ColorModeSwitcher/>
                 </Flex>
             </Flex>

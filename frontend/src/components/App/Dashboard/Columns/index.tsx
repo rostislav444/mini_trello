@@ -1,4 +1,4 @@
-import {Flex, useColorMode} from "@chakra-ui/react";
+import {Flex, useColorMode, useColorModeValue} from "@chakra-ui/react";
 import {DashboardState} from "interfaces/dashboard";
 import {Column} from "components/App/Dashboard/Columns/Column";
 import {DragDropContext} from "react-beautiful-dnd";
@@ -16,9 +16,7 @@ interface DashboardColumnsProps {
 export const DashboardColumns = ({dashboard, refetch}: DashboardColumnsProps) => {
     const {columns, assignees} = dashboard;
     const {reorderCardMutation} = useGraphQL();
-    const {colorMode} = useColorMode();
-    const bgColor = colorMode === "dark" ? "gray.700" : "gray.100";
-
+    const totalColumns = columns?.length || 0;
 
     const applyReorder = (result: any) => {
         const {destination: dest, source} = result;
@@ -59,7 +57,6 @@ export const DashboardColumns = ({dashboard, refetch}: DashboardColumnsProps) =>
         }
     }
 
-
     const handleOnDragEnd = (result: any) => {
         const {draggableId, destination, source} = result;
 
@@ -89,7 +86,13 @@ export const DashboardColumns = ({dashboard, refetch}: DashboardColumnsProps) =>
     return <DragDropContext onDragEnd={handleOnDragEnd}>
         <Flex mt={6} overflowX={'auto'} alignItems="flex-start">{
             columns?.map((column, index) => (
-                <Column key={column.id} column={column} assignees={assignees || []} bgColor={bgColor} refetch={refetch}/>
+                <Column
+                    key={column.id}
+                    column={column}
+                    assignees={assignees || []}
+                    refetch={refetch}
+                    totalColumns={totalColumns}
+                />
             ))
         }</Flex>
     </DragDropContext>

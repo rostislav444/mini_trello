@@ -1,10 +1,10 @@
 import {CardState} from "interfaces/card";
-import {Box, Flex, FormControl, FormLabel, Grid, GridItem, Heading, Modal, ModalContent, ModalHeader, ModalOverlay, Switch, Icon} from "@chakra-ui/react";
+import {Box, Flex, FormControl, FormLabel, Grid, GridItem, Heading, Modal, ModalContent, ModalHeader, ModalOverlay, Switch, Icon, useColorModeValue} from "@chakra-ui/react";
 import React, {useEffect} from "react";
 import {COLUMN_CARD} from "graphql/queries/getColumnCards";
 import {useLazyQuery} from "@apollo/client";
-import {CardBodyData} from "components/App/Dashboard/Columns/Card/Body/Data";
-import {CardForm} from "components/App/Dashboard/Columns/Card/Body/Form";
+import {CardBodyData} from "components/App/Dashboard/Columns/Column/Card/Body/Data";
+import {CardForm} from "components/App/Dashboard/Columns/Column/Card/Body/Form";
 import {useNavigate, useParams} from "react-router-dom";
 import {Draggable} from "react-beautiful-dnd";
 import {CircleIcon} from "components/UI/Icons";
@@ -17,14 +17,16 @@ interface CardProps extends CardState {
     }[];
     columnId: string;
     order: number;
+    refetchDashboard: () => void;
 }
 
-export const Card = ({id, columnId, order, title, priority, dashboardAssignees}: CardProps) => {
+export const Card = ({id, columnId, order, title, priority, dashboardAssignees, refetchDashboard}: CardProps) => {
     const navigate = useNavigate();
     const {cardId} = useParams();
     const [loadCard, {loading, error, data, refetch}] = useLazyQuery(COLUMN_CARD, {variables: {cardId: id}})
     const [card, setCard] = React.useState<CardState | null>(null)
     const [editMode, setEditMode] = React.useState<boolean>(false)
+    const bg = useColorModeValue('gray.200', 'gray.600')
 
 
     useEffect(() => {
@@ -38,6 +40,12 @@ export const Card = ({id, columnId, order, title, priority, dashboardAssignees}:
     const onFulfilled = () => {
         refetch()
         setEditMode(false)
+    }
+
+    const onDelete = () => {
+        navigate(``)
+        onClose()
+        refetchDashboard()
     }
 
     const onOpen = () => navigate(`card/${id}`)
@@ -66,14 +74,14 @@ export const Card = ({id, columnId, order, title, priority, dashboardAssignees}:
                     ref={provided.innerRef}
                     cursor='pointer'
                     onClick={onOpen}
-                    bg={'whiteAlpha.50'}
+                    bg={bg}
                     p={4}
                     borderRadius={4}
                     mb={2}
                     gridTemplateColumns='1fr 12px'
                 >
                     <GridItem>
-                         <Heading size="sm">{title}</Heading>
+                         <Heading maxW={240} size="sm">{title}</Heading>
                     </GridItem>
                     <GridItem>
                         <CircleIcon color={getPriorityColor(priority)} />
@@ -101,8 +109,8 @@ export const Card = ({id, columnId, order, title, priority, dashboardAssignees}:
                 {card ? <Box>
                     {editMode ?
                         // TO DO integrate usersList in update function to select assignees
-                        <CardForm card={card} usersList={dashboardAssignees} onFulfilled={onFulfilled} create={false} onClose={onClose}/> :
-                        <CardBodyData card={card} onClose={onClose}/>
+                        <CardForm card={card} usersList={dashboardAssignees} onFulfilled={onFulfilled} create={false} onDelete={onDelete} onClose={onClose}/> :
+                        <CardBodyData card={card} refetchCard={refetch} onClose={onClose}/>
                     }
                 </Box> : <p>Loading...</p>}
             </ModalContent>

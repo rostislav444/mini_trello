@@ -160,6 +160,16 @@ class CardAssigneeModel(BaseModel):
     user_id = UnicodeAttribute()
 
 
+class CardCommentsIndex(GlobalSecondaryIndex):
+    class Meta:
+        read_capacity_units = 2
+        write_capacity_units = 1
+        projection = AllProjection()
+
+    created_at = NumberAttribute(range_key=True)
+    card_id = UnicodeAttribute(hash_key=True)
+
+
 class CardCommentsModel(BaseModel):
     class Meta(BaseModel.Meta):
         table_name = 'card_comments'
@@ -170,6 +180,8 @@ class CardCommentsModel(BaseModel):
     comment = UnicodeAttribute()
     created_at = UTCDateTimeAttribute(default=datetime.now)
     updated_at = UTCDateTimeAttribute(default=datetime.now)
+
+    card_comments_index = CardCommentsIndex()
 
 
 class CardAttachmentsModel(BaseModel):
