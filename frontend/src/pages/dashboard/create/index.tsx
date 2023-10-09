@@ -1,29 +1,10 @@
 import {useForm} from "react-hook-form";
-import {
-    Box,
-    Button,
-    Checkbox,
-    CheckboxGroup,
-    Flex,
-    FormControl,
-    FormErrorMessage,
-    FormLabel,
-    Grid,
-    GridItem,
-    Heading,
-    HStack,
-    Input,
-    Tag,
-    TagCloseButton,
-    TagLabel,
-    Textarea,
-    useColorMode
-} from "@chakra-ui/react";
+import {Box, Button, FormControl, FormErrorMessage, FormLabel, Grid, Heading, HStack, Input, Tag, TagCloseButton, TagLabel, Textarea, useColorMode} from "@chakra-ui/react";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {User} from "interfaces/user";
-import {useGraphQL} from "../../../context/graphqlConext";
-import {useUser} from "../../../context/userContext";
+import {useGraphQL} from "context/graphqlConext";
+import {useUser} from "context/userContext";
 import {Assignee} from "components/UI/Form/Assignee";
 
 
@@ -60,6 +41,7 @@ export const CreateDashboard = () => {
     const [newColumn, setNewColumn] = useState<string>('');
 
     useEffect(() => {
+        usersListQuery.refetch();
         if (usersListQuery?.data?.users) {
             setUsersList(usersListQuery.data.users
                                        .filter((u: User) => u.id !== user?.id)

@@ -3,6 +3,7 @@ import {Box, Button, FormControl, FormErrorMessage, FormLabel, Heading, Input, u
 import {useForm} from 'react-hook-form';
 import {ColorModeSwitcher} from "components/UI/ColorModeSwitcher";
 import {useUser} from "../../context/userContext";
+import {allKeysToCamelCase} from "utils/allKeysToCamelCase";
 
 
 type FormData = {
@@ -10,11 +11,11 @@ type FormData = {
     password: string;
 };
 
+
 export const Login = () => {
     const bg = useColorModeValue('white', 'gray.700');
     const {login} = useUser();
     const {register, handleSubmit, formState: {errors}} = useForm<FormData>();
-
 
     const onSubmit = async (data: FormData) => {
         try {
@@ -26,9 +27,8 @@ export const Login = () => {
                 body: JSON.stringify(data)
             });
             const responseData = await response.json();
-            console.log(responseData)
             if (responseData.token) {
-                login(responseData.user, responseData.token);
+                login(allKeysToCamelCase(responseData.user), responseData.token);
             }
         } catch (error) {
             console.error("Error during login:", error);

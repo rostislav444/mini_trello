@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Avatar, Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text, useColorMode} from "@chakra-ui/react";
+import {Avatar, Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text} from "@chakra-ui/react";
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import {ColorModeSwitcher} from "../../../UI/ColorModeSwitcher";
 import {useNavigate, useParams} from "react-router-dom";
@@ -13,14 +13,8 @@ export const Header: React.FC = () => {
     const {dashboardId} = useParams();
     const navigate = useNavigate();
     const {dashboardListQuery} = useGraphQL();
-    const {colorMode} = useColorMode();
-
     const [dashboardList, setDashboardList] = useState<DashboardState[]>([]);
     const selectedDashboard = dashboardList.find(dashboard => dashboard.id === dashboardId)
-
-    // const bgColor = useColorModeValue('gray.200', 'gray.600')
-    // const bgColorSelected = useColorModeValue('gray.300', 'gray.500')
-
 
     useEffect(() => {
         if (dashboardListQuery && dashboardListQuery.data) {
@@ -28,7 +22,7 @@ export const Header: React.FC = () => {
                 return ({...dashboard, selected: dashboard.id === dashboardId})
             }));
         }
-    }, [dashboardListQuery.data]);
+    }, [dashboardListQuery, dashboardId]);
 
     const handleDashboardClick = (dashboardId: string) => {
         navigate(`/dashboard/${dashboardId}`);
@@ -64,7 +58,7 @@ export const Header: React.FC = () => {
                 </Flex>
                 <Flex flex='1' align='center'>
                     <Avatar w='36px' h='36px' bg='teal.500'/>
-                    <Text whiteSpace='nowrap' ml='4'>{user?.email}</Text>
+                    <Text whiteSpace='nowrap' ml='4'>{user?.firstName} {user?.lastName}</Text>
                     <Button ml='6' variant="ghost" onClick={logout}>Logout</Button>
                     <ColorModeSwitcher/>
                 </Flex>

@@ -1,6 +1,6 @@
-import {Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useColorModeValue, useDisclosure,} from '@chakra-ui/react'
+import {Button, Modal, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure,} from '@chakra-ui/react'
 import React from "react";
-import {CardForm} from "components/App/Dashboard/Columns/Column/Card/Body/Form";
+import {CardForm} from "components/App/Dashboard/Card/Body/Form";
 import {useNavigate} from "react-router-dom";
 
 

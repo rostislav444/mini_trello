@@ -27,7 +27,7 @@ interface CardBodyFormProps {
 
 export const CardForm = ({card, columnId, usersList, onFulfilled, create = true, onDelete, onClose}: CardBodyFormProps) => {
     const {createCardMutation, updateCardMutation, deleteCardMutation} = useGraphQL()
-    const {register, watch, handleSubmit, formState: {errors}, setValue} = useForm<FormData>({
+    const {register, watch, handleSubmit, formState: {errors}} = useForm<FormData>({
         defaultValues: {
             title: card?.title || '',
             description: card?.description || '',

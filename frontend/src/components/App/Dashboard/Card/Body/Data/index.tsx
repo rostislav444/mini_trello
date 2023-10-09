@@ -1,7 +1,7 @@
 import {Button, Heading, Box, ModalBody, ModalFooter, Tag, Text, Flex} from "@chakra-ui/react";
 import React from "react";
 import {CardState} from "interfaces/card";
-import {CardComments} from "components/App/Dashboard/Columns/Column/Card/Body/Data/Comments";
+import {CardComments} from "components/App/Dashboard/Card/Body/Data/Comments";
 
 
 interface CardBodyDataProps {

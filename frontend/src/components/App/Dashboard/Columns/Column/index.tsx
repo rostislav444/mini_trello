@@ -1,6 +1,6 @@
 import {Box, Flex, Heading, useColorModeValue} from "@chakra-ui/react";
-import {CreateCard} from "components/App/Dashboard/Columns/Column/Card/Create";
-import {Card} from "components/App/Dashboard/Columns/Column/Card";
+import {CreateCard} from "components/App/Dashboard/Card/Create";
+import {Card} from "components/App/Dashboard/Card";
 import React from "react";
 import {Droppable} from "react-beautiful-dnd";
 import {ColumnState} from "interfaces/column";

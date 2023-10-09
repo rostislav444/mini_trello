@@ -1,10 +1,10 @@
 import {CardState} from "interfaces/card";
-import {Box, Flex, FormControl, FormLabel, Grid, GridItem, Heading, Modal, ModalContent, ModalHeader, ModalOverlay, Switch, Icon, useColorModeValue} from "@chakra-ui/react";
+import {Box, Flex, FormControl, FormLabel, Grid, GridItem, Heading, Modal, ModalContent, ModalHeader, ModalOverlay, Switch, useColorModeValue} from "@chakra-ui/react";
 import React, {useEffect} from "react";
 import {COLUMN_CARD} from "graphql/queries/getColumnCards";
 import {useLazyQuery} from "@apollo/client";
-import {CardBodyData} from "components/App/Dashboard/Columns/Column/Card/Body/Data";
-import {CardForm} from "components/App/Dashboard/Columns/Column/Card/Body/Form";
+import {CardBodyData} from "components/App/Dashboard/Card/Body/Data";
+import {CardForm} from "components/App/Dashboard/Card/Body/Form";
 import {useNavigate, useParams} from "react-router-dom";
 import {Draggable} from "react-beautiful-dnd";
 import {CircleIcon} from "components/UI/Icons";

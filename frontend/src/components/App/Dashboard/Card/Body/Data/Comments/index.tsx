@@ -1,5 +1,5 @@
 import {CardCommentState} from "interfaces/cardCommets";
-import {CardCommentForm} from "components/App/Dashboard/Columns/Column/Card/Body/Data/Comments/Form";
+import {CardCommentForm} from "components/App/Dashboard/Card/Body/Data/Comments/Form";
 
 import {Avatar, Box, Card, CardBody, CardHeader, Flex, Heading, Text, useColorModeValue} from "@chakra-ui/react";
 import {DeleteIcon} from "@chakra-ui/icons";

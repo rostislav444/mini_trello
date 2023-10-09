@@ -1,6 +1,6 @@
 import {DASHBOARD_BY_ID} from "graphql/queries/getDashboardById";
 import {useParams} from "react-router-dom";
-import {Box, Button, Flex, Heading} from "@chakra-ui/react";
+import {Box, Flex, Heading} from "@chakra-ui/react";
 import {useQuery} from "@apollo/client";
 import {DashboardColumns} from "components/App/Dashboard/Columns";
 import {CreateColumn} from "components/App/Dashboard/Columns/Column/Create";

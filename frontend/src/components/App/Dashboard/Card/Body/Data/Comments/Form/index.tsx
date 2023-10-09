@@ -1,5 +1,5 @@
 import {useForm} from "react-hook-form";
-import {Button, FormControl, FormErrorMessage, FormLabel, Textarea} from "@chakra-ui/react";
+import {Button, FormControl, FormErrorMessage, Textarea} from "@chakra-ui/react";
 import React from "react";
 import {useGraphQL} from "context/graphqlConext";
 
@@ -17,7 +17,7 @@ interface CardCommentFormProps {
 
 export const CardCommentForm = ({cardId, refetchCard}: CardCommentFormProps) => {
     const {createCardCommentMutation} = useGraphQL()
-    const {register, watch, handleSubmit, formState: {errors}, setValue} = useForm<FormData>()
+    const {register, handleSubmit, formState: {errors}, setValue} = useForm<FormData>()
 
     const onSubmit = async (data: FormData) => {
         const response = await createCardCommentMutation({

@@ -11,6 +11,10 @@ from app.schema import schema
 from utils.startup import create_tables, create_admin_user
 
 app = Flask(__name__)
+
+create_tables()
+create_admin_user()
+
 CORS(app)
 
 app.debug = True
@@ -34,8 +38,7 @@ def graphql_server():
 
 app.register_blueprint(main_routes)
 
-create_tables()
-create_admin_user()
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
