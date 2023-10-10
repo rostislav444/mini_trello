@@ -42,15 +42,16 @@ class Query(graphene.ObjectType):
         # Extract dashboard_ids from assignments
         dashboard_ids = [assignment.dashboard_id for assignment in assignments]
 
-        # If a specific dashboard id is provided, check if it's in user's dashboards.
+        # If a specific dashboard id is provided
         if dashboard_id:
+            # Check if the user is assigned to the provided dashboard_id
             if dashboard_id in dashboard_ids:
                 return [DashboardModel.get(dashboard_id)]
             else:
                 # The provided id is not in the list of user's dashboards.
                 return []
 
-        # Use batch_get to retrieve all the dashboards for this user_id
+        # If no specific dashboard_id is provided, fetch all assigned dashboards
         user_dashboards = DashboardModel.batch_get(dashboard_ids)
 
         return user_dashboards

@@ -12,7 +12,7 @@ services:
     ports:
       - "5005:5005"
     volumes:
-      - ./backend:/app
+      - ./backend:/backend
     environment:
       - FLASK_ENV=development
       - AWS_ACCESS_KEY_ID=fake

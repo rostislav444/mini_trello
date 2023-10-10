@@ -6,6 +6,7 @@ import {CreateDashboard} from "./dashboard/create";
 import {Dashboard} from "./dashboard";
 import {useUser} from "context/userContext";
 import {globalEvents} from 'utils/events';
+import {useGraphQL} from "context/graphqlConext";
 
 
 const router = createBrowserRouter([
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
 ].map((route) => ({...route, element: <Layout>{route.element}</Layout>,})));
 
 export const Main = () => {
+    const {dashboardListQuery} = useGraphQL();
     const {token, logout} = useUser();
 
     useEffect(() => {
@@ -40,6 +42,12 @@ export const Main = () => {
             globalEvents.off('logout', handleLogout);
         };
     }, [logout]);
+
+    useEffect(() => {
+        if (token) {
+            dashboardListQuery.refetch();
+        }
+    }, [token, dashboardListQuery]);
 
     if (!token) return <Login/>;
 

@@ -5,13 +5,16 @@ import {useQuery} from "@apollo/client";
 import {Columns} from "components/App/Dashboard/Columns";
 import {CreateColumn} from "components/App/Dashboard/Columns/Column/Create";
 import {InfoOutlineIcon} from "@chakra-ui/icons";
+import {useEffect} from "react";
 
 
 export const Dashboard = () => {
     const {dashboardId} = useParams();
     const {loading, error, data, refetch, networkStatus} = useQuery(DASHBOARD_BY_ID, {variables: {dashboardId},})
 
-    console.log('Dashboard', data)
+    useEffect(() => {
+        refetch()
+    }, []);
 
     if (loading) {
         return <Heading>Loading</Heading>
