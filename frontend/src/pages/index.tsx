@@ -7,6 +7,7 @@ import {Dashboard} from "./dashboard";
 import {useUser} from "context/userContext";
 import {globalEvents} from 'utils/events';
 import {useGraphQL} from "context/graphqlConext";
+import {client} from "utils/ApolloClient";
 
 
 const router = createBrowserRouter([
@@ -45,9 +46,10 @@ export const Main = () => {
 
     useEffect(() => {
         if (token) {
-            dashboardListQuery.refetch();
+            // refetch all queries
+            client.resetStore();
         }
-    }, [token, dashboardListQuery]);
+    }, [token]);
 
     if (!token) return <Login/>;
 

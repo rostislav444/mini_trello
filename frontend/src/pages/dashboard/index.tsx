@@ -7,10 +7,9 @@ import {CreateColumn} from "components/App/Dashboard/Columns/Column/Create";
 import {InfoOutlineIcon} from "@chakra-ui/icons";
 import {useEffect} from "react";
 
-
 export const Dashboard = () => {
     const {dashboardId} = useParams();
-    const {loading, error, data, refetch, networkStatus} = useQuery(DASHBOARD_BY_ID, {variables: {dashboardId},})
+    const {loading, data, refetch, networkStatus} = useQuery(DASHBOARD_BY_ID, {variables: {dashboardId},})
 
     useEffect(() => {
         refetch()
