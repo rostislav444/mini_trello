@@ -1,5 +1,6 @@
 # Personal
 *.txt
+.DS_Store
 
 # PyCharm
 
