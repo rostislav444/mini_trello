@@ -14,7 +14,7 @@ export const Dashboard = () => {
 
     useEffect(() => {
         refetch()
-    }, []);
+    }, [refetch]);
 
     if (loading) {
         return <Heading>Loading</Heading>
