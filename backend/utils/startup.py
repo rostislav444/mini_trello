@@ -1,4 +1,5 @@
 import uuid
+
 from faker import Faker
 
 from app.models import models, UsersModel, RoleEnum
@@ -6,18 +7,20 @@ from app.models import models, UsersModel, RoleEnum
 # Create a Faker instance
 faker = Faker()
 
+
 def create_tables():
     for model in models:
         print(model, model.exists())
         if not model.exists():
             model.create_table(read_capacity_units=1, write_capacity_units=1, wait=True)
 
+
 def create_admin_user():
     for i in range(10):
         data = {
             'id': str(uuid.uuid4()),
             'first_name': faker.first_name(),  # Use Faker to generate a random first name
-            'last_name': faker.last_name(),    # Use Faker to generate a random last name
+            'last_name': faker.last_name(),  # Use Faker to generate a random last name
             'email': 'email_{}@gmail.com'.format(str(i)),
             'role': RoleEnum.USER.value,
         }
@@ -40,6 +43,7 @@ def create_admin_user():
         user.set_password('admin')
         user.save()
         print('Admin user created')
+
 
 __all__ = [
     'create_tables',

@@ -8,7 +8,7 @@ from app.models import (
     CardsModel,
     CardAssigneeModel,
     CardCommentsModel,
-    CardAttachmentsModel, DashboardAssigneeModel
+    DashboardAssigneeModel
 )
 from app.schema.types import (
     Users,
@@ -17,7 +17,6 @@ from app.schema.types import (
     Cards,
     CardAssignee,
     CardComments,
-    CardAttachments
 )
 
 
@@ -30,7 +29,6 @@ class Query(graphene.ObjectType):
     cards = graphene.List(Cards, column_id=graphene.String(required=True))
     card_assignee = graphene.List(CardAssignee)
     card_comments = graphene.List(CardComments)
-    card_attachments = graphene.List(CardAttachments)
 
     def resolve_users(self, info):
         return UsersModel.scan()
@@ -78,9 +76,6 @@ class Query(graphene.ObjectType):
 
     def resolve_card_comments(self, info):
         return CardCommentsModel.scan()
-
-    def resolve_card_attachments(self, info):
-        return CardAttachmentsModel.scan()
 
 
 __all__ = [

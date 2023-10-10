@@ -1,4 +1,6 @@
-FROM python:3.11-slim
+# backend/Dockerfile
+
+FROM python:3.8-slim
 
 WORKDIR /app
 
@@ -7,4 +9,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD ["flask", "run", "--host", "0.0.0.0", "--port", "5000"]
+CMD ["flask", "--app", "main", "run", "--host=0.0.0.0", "--port=5005"]

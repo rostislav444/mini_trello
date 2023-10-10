@@ -12,7 +12,7 @@ class BaseModel(Model):
     class Meta:
         abstract = True
         region = 'us-west-2'
-        host = 'http://localhost:8000'
+        host = 'http://dynamodb-local:8000'
 
 
 class RoleEnum(graphene.Enum):
@@ -184,16 +184,6 @@ class CardCommentsModel(BaseModel):
     card_comments_index = CardCommentsIndex()
 
 
-class CardAttachmentsModel(BaseModel):
-    class Meta(BaseModel.Meta):
-        table_name = 'card_attachments'
-
-    id = UnicodeAttribute(hash_key=True)
-    card_id = UnicodeAttribute()
-    user_id = UnicodeAttribute()
-    attachment = UnicodeAttribute()
-
-
 models = [
     UsersModel,
     DashboardModel,
@@ -202,7 +192,6 @@ models = [
     CardsModel,
     CardAssigneeModel,
     CardCommentsModel,
-    CardAttachmentsModel,
 ]
 
 indexes = [
@@ -219,5 +208,4 @@ __all__ = [
     'CardsModel',
     'CardAssigneeModel',
     'CardCommentsModel',
-    'CardAttachmentsModel',
 ]

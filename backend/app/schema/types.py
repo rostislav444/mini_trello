@@ -8,7 +8,6 @@ from app.models import (
     CardsModel,
     CardAssigneeModel,
     CardCommentsModel,
-    CardAttachmentsModel
 )
 from utils.pynamo_model_boject_type import PynamoObjectType
 
@@ -34,12 +33,6 @@ class CardComments(PynamoObjectType):
 
     def resolve_user(self, info):
         return UsersModel.get(self.user_id)
-
-
-class CardAttachments(PynamoObjectType):
-    class Meta:
-        model = CardAttachmentsModel
-        interfaces = (graphene.Node,)
 
 
 class Cards(PynamoObjectType):
@@ -111,5 +104,4 @@ __all__ = [
     'Cards',
     'CardAssignee',
     'CardComments',
-    'CardAttachments'
 ]
