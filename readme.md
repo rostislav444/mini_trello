@@ -1,8 +1,8 @@
 Start up
 1. docker-compose -f docker-compose.prod.yml up --build
-2. go to http://localhost
-3. E-mail: admin@admin.com, password: admin
-
+2. Wait until build is finished
+3. Go to http://localhost
+4. E-mail: admin@admin.com, password: admin
 
 
 Also available users:

@@ -3,8 +3,11 @@ import {onError} from "@apollo/client/link/error";
 import {setContext} from '@apollo/client/link/context';
 import { globalEvents } from 'utils/events';
 
+
+export const serverUrl = 'http://0.0.0.0:5005'
+
 const httpLink = createHttpLink({
-    uri: 'http://0.0.0.0:5005/graphql',
+    uri: serverUrl + '/graphql',
 });
 
 const authLink = setContext(() => {
@@ -22,7 +25,7 @@ const authLink = setContext(() => {
 
 const errorLink = onError(({graphQLErrors, networkError}) => {
     if (networkError && 'statusCode' in networkError && networkError.statusCode === 401) {
-        console.log('Unauthorized, status code - 401', networkError)
+        console.log('Unauthorized, status code - 401')
         globalEvents.emit('logout');
     }
 });

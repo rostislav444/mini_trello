@@ -23,6 +23,17 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(days=7)
 jwt = JWTManager(app)
 
 
+@app.route('/check_token', methods=['POST'])
+@jwt_required()
+def check_token():
+    user_id = get_jwt_identity()
+    try:
+        UsersModel.get(user_id)
+    except UsersModel.DoesNotExist:
+        return "User does not exist", 401
+    return "OK", 200
+
+
 @app.route('/graphql', methods=['POST'])
 @jwt_required()
 def graphql_server():
