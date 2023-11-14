@@ -1,4 +1,5 @@
 Start up
+0. chmod +x backend/entrypoint.sh
 1. docker-compose -f docker-compose.prod.yml up --build
 2. Wait until build is finished
 3. Go to http://localhost

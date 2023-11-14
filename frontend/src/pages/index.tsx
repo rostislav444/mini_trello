@@ -34,27 +34,33 @@ export const Main = () => {
 
     // Check token validity
     useEffect(() => {
-        if (token) {
-            fetch(serverUrl + '/check_token', {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-                .then(response => {
-                    if (response.status === 200) {
-                        setIsTokenValid(true);
-                    } else {
-                        setIsTokenValid(false);
-                        logout();
+        async function checkToken() {
+            try {
+                const response = await fetch(serverUrl + '/check_token', {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     }
                 })
-                .catch(() => {
+
+                if (response.status === 200) {
+                    setIsTokenValid(true);
+                } else {
                     setIsTokenValid(false);
                     logout();
-                });
+                }
+
+            } catch {
+                setIsTokenValid(false);
+                logout();
+            }
         }
+
+         if (token) {
+             checkToken()
+         }
+
     }, [token, logout]);
 
     // Listen for logout event

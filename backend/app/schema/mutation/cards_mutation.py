@@ -1,7 +1,7 @@
 import uuid
 
 import graphene
-
+from pynamodb.models import BatchWrite
 from app.models import CardsModel, CardAssigneeModel, PriorityEnum, CardCommentsModel
 from app.schema.types import Cards
 from utils.valid_uuid import decode_id
@@ -113,31 +113,34 @@ class ReorderCard(graphene.Mutation):
             cards_in_column = list(CardsModel.card_order_index.query(column_id))
 
             # Adjust the order of the cards affected by the move
-            for card in cards_in_column:
-                if card.order > moving_card.order:
-                    card.order -= 1
-                    card.save()
+            with BatchWrite(CardsModel) as batch:
+                for card in cards_in_column:
+                    if card.order > moving_card.order:
+                        card.order -= 1
+                        batch.save(card)
 
-                if card.order >= order:
-                    card.order += 1
-                    card.save()
+                    if card.order >= order:
+                        card.order += 1
+                        batch.save(card)
 
         else:
             # Move card to another column
 
             # Decrease the order of cards in the original column that are after the moving card
             original_cards = list(CardsModel.card_order_index.query(moving_card.column_id))
-            for card in original_cards:
-                if card.order > moving_card.order:
-                    card.order -= 1
-                    card.save()
+            with BatchWrite(CardsModel) as batch:
+                for card in original_cards:
+                    if card.order > moving_card.order:
+                        card.order -= 1
+                        batch.save(card)
 
             # Increase the order of cards in the target column that are after the specified order
             target_cards = list(CardsModel.card_order_index.query(column_id))
-            for card in target_cards:
-                if card.order >= order:
-                    card.order += 1
-                    card.save()
+            with BatchWrite(CardsModel) as batch:
+                for card in target_cards:
+                    if card.order >= order:
+                        card.order += 1
+                        batch.save(card)
 
             # Update the column_id of the moving card
             moving_card.column_id = column_id

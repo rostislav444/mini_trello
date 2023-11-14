@@ -1,12 +1,13 @@
-# backend/Dockerfile
-
 FROM python:3.8-slim
 
 WORKDIR /backend
 
 COPY requirements.txt requirements.txt
+RUN apt-get update && apt-get install -y curl
 RUN pip install -r requirements.txt
 
 COPY . .
+COPY entrypoint.sh entrypoint.sh
+RUN chmod +x entrypoint.sh
 
-CMD ["flask", "--app", "main", "run", "--host=0.0.0.0", "--port=5005",  "--reload"]
+CMD ["./entrypoint.sh"]
